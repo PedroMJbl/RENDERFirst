@@ -1,0 +1,13 @@
+
+
+
+{
+    // ...other settings are here...
+
+    "mongodb.connections": [
+        {
+            "name": "Mi Contenedor de Docker",
+            "connectionString": "mongodb://192.168.99.100:27017/"
+        }
+    ]
+}
