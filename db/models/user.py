@@ -97,7 +97,7 @@ class User(BaseModel):
                                          # Gemini 4 #
 
 # Archivo: db/models/user.py
-
+'''
 from pydantic import BaseModel
 # from bson import ObjectId # ⬅️ Si tuvieras que usarla, se importaría así
 
@@ -121,3 +121,33 @@ class User(BaseModel):
         
         # 🟢 ESTO HACE QUE LOS CAMPOS CON VALOR 'None' SE OMITAN AL DEVOLVER EL JSON
         exclude_none = True
+'''
+
+from pydantic import BaseModel, Field
+from typing import Optional
+
+# Modelo base para la entrada de datos (POST)
+class User(BaseModel):
+    # Nota: No incluimos 'id' porque lo genera MongoDB
+    username: str
+    email: str
+    password: str # <-- Contraseña en texto plano para hashing en el router
+
+# Modelo para la salida de datos de la base de datos (GET/POST/PUT Response)
+# Incluye el 'id' generado por MongoDB
+class UserDB(BaseModel):
+    id: Optional[str] = Field(alias="_id") # Mapea el _id de MongoDB al campo 'id' de Pydantic
+    username: str
+    email: str
+    password: str # <-- Contraseña hasheada (siempre debe estar presente)
+
+# Modelo para la actualización de datos (PUT)
+# Todos los campos son opcionales excepto el ID
+class UserUpdate(BaseModel):
+    id: str # <-- Este campo es obligatorio para saber a quién actualizar
+    username: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None # <-- Contraseña en texto plano si se va a actualizar
+
+
+

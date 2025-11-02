@@ -1,0 +1,10 @@
+# Ignorar archivos generados por Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entorno virtual
+venv/
+
+# Archivos de notas que no deben ir al repo (como ATLAS.txt)
+ATLAS.txt
