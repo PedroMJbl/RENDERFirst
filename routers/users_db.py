@@ -1585,8 +1585,8 @@ from utils.security import hash_password, verify_password
 router = APIRouter(prefix="/userdb", tags=["MongoDB Users"])
 
 # --- COLECCIÓN DE MONGODB ---
-users_collection = db_client.fastapi_db["users"]     # Para localhost
-#users_collection = db_client.Pedro_db_user["users"]  # Para Mongo-ATLAS
+#users_collection = db_client.fastapi_db["users"]     # Para localhost
+users_collection = db_client.Pedro_db_user["users"]  # Para Mongo-ATLAS
 #users_collection = db_client.fastapi_db["users"]      # Para Mongo-ATLAS
 
 # --- Funciones Auxiliares ---
