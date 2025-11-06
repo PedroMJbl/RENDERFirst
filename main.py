@@ -350,7 +350,7 @@ app = FastAPI(
 # Montar directorios estáticos usando la ruta absoluta
 app.mount(
     "/static",
-    StaticFiles(directory=BASE_DIR / "static"), # <--- LÍNEA MODIFICADA CLAVE
+    StaticFiles(directory=BASE_DIR / "Static"), # <--- LÍNEA MODIFICADA CLAVE
     name="static"
 )
 # ...
