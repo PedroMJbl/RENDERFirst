@@ -316,7 +316,7 @@ async def root():
 async def url():
     return {"url_course": "https://mouredev.com/python"}
 '''
-
+'''
 from fastapi import FastAPI
 from routers import products, users, jwt_auth_users, basic_auth_users, users_db
 from fastapi.staticfiles import StaticFiles
@@ -330,7 +330,30 @@ app = FastAPI(
 
 # Montar directorios estáticos
 app.mount("/static", StaticFiles(directory="static"), name="static")
+'''
+                                         # Cambiado el 06/11/2025
+from fastapi import FastAPI
+from routers import products, users, jwt_auth_users, basic_auth_users, users_db
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path # <--- NUEVA IMPORTACIÓN
 
+# Define la ruta base para que apunte a la ubicación real del proyecto
+BASE_DIR = Path(__file__).resolve().parent # <--- NUEVA LÍNEA
+
+# Inicialización de la aplicación FastAPI con el título personalizado
+app = FastAPI(
+    title="FASTAPI2",
+    version="0.1.0",
+    description="Backend de ejemplo con Autenticación JWT y persistencia en MongoDB."
+)
+
+# Montar directorios estáticos usando la ruta absoluta
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"), # <--- LÍNEA MODIFICADA CLAVE
+    name="static"
+)
+# ...
 
 # --------------- Inclusión de Routers (con etiquetas para Swagger) ---------------
 
