@@ -1,3 +1,4 @@
+'''
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
@@ -9,6 +10,21 @@ from jose import JWTError, jwt
 SECRET_KEY = "tu-clave-secreta-super-segura" 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30 # El token expirará después de 30 minutos
+'''                      # 07/11/2025 Gemini
+from datetime import datetime, timedelta
+from typing import Optional
+from jose import JWTError, jwt
+import os # <--- NUEVA IMPORTACIÓN
+
+# --- Configuración de JWT ---
+
+# Carga la clave de la variable de entorno 'JWT_SECRET_KEY'.
+# Si no la encuentra (p. ej., en desarrollo local), usa una clave predeterminada.
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "tu-clave-secreta-super-segura") # <--- LÍNEA CORREGIDA
+print(f"CLAVE SECRETA DE JWT CARGADA: {SECRET_KEY}") # <--- ¡LÍNEA A AÑADIR!
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30 
+# ... el resto de tu código
 
 # --- Funciones de Creación y Verificación de Tokens ---
 
