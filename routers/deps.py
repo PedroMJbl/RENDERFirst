@@ -4,7 +4,8 @@ from jose import JWTError, jwt
 from pydantic import BaseModel
 from typing import Optional
 from starlette.concurrency import run_in_threadpool 
-from .users import User # <-- Asegúrate que esta línea exista en deps.py
+#from .users import User # <-- Asegúrate que esta línea exista en deps.py~
+from routers.users import User
 
 # Importamos la función de búsqueda para el login (es síncrona)
 from routers.users_db import search_user_for_login
