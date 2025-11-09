@@ -336,6 +336,7 @@ from fastapi import FastAPI
 from routers import products, users, jwt_auth_users, basic_auth_users, users_db
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path # <--- NUEVA IMPORTACIÓN
+# Prueba de sincronizacion de Token    07/11/2025
 
 # Define la ruta base para que apunte a la ubicación real del proyecto
 BASE_DIR = Path(__file__).resolve().parent # <--- NUEVA LÍNEA

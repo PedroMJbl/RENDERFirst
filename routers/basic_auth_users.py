@@ -75,10 +75,11 @@ async def login (form:OAuth2PasswordRequestForm=Depends()):
                        # 12/08/2025 19:36 Acabo la hora, tiene mucho código esto de la -AUTORIZACIÓN OAUTH2 #
                        # miércoles, 13 de agosto de 2025 19:41 Empiezo la hora #
 
-
+'''
 @router.get('/users/me')
 async def me(user:User=Depends(current_user)):
-    return user 
+    return user
+'''
                      # 13/08/2025 20:57 Acabo la hora, estoy implementando/copiando el código de Moure para -AUTORIZACIÓN OAUTH2-, 
                      # ya casi  se ha terminado #
                      # jueves, 14 de agosto de 2025 08:14 Empiezo la hora #

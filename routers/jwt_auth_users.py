@@ -1005,10 +1005,15 @@ from starlette.concurrency import run_in_threadpool
 from utils.security import verify_password
 # IMPORTANTE: Importamos la función de búsqueda desde el router de MongoDB
 from routers.users_db import search_user_for_login
+# 09/11/2025
+from .users import User # <-- ¡CORRECTO!
+# Importar la dependencia de JWT desde 'deps.py' (está en la misma carpeta)
+from .deps import get_current_user
 
 # Importamos las herramientas de JWT (requiere 'python-jose')
 from utils.jwt_tools import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
 # --- Router y Esquema de Autenticación ---
+
 
 router = APIRouter(prefix="/auth", tags=["auth"], responses={
     status.HTTP_401_UNAUTHORIZED: {"description": "Credenciales inválidas"}
@@ -1037,6 +1042,10 @@ def authenticate_user(username: str, password: str) -> Optional[dict]:
     # 4. Éxito: Devolvemos el documento del usuario de la DB
     return user_doc
 
+@router.get('/users/me')
+async def me(user: User = Depends(get_current_user)):
+    return user
+
 # --- Endpoint de Login JWT ---
 
 @router.post("/login", tags=["auth"])
@@ -1049,6 +1058,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     # CORRECCIÓN CLAVE: Ejecutamos la función de autenticación (que es bloqueante) 
     # en un thread de fondo para no congelar el servidor.
     # ---------------------------
+    
     user = await run_in_threadpool(authenticate_user, form_data.username, form_data.password)
 
     # Si la autenticación falla (el usuario es None)
@@ -1069,6 +1079,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     
     # Devolvemos el token
     return {"access_token": access_token, "token_type": "bearer"}
+
+
 
 
                                          
