@@ -4,6 +4,7 @@ from jose import JWTError, jwt
 from pydantic import BaseModel
 from typing import Optional
 from starlette.concurrency import run_in_threadpool 
+from .users import User # <-- Asegúrate que esta línea exista en deps.py
 
 # Importamos la función de búsqueda para el login (es síncrona)
 from routers.users_db import search_user_for_login
@@ -54,4 +55,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     
     # 3. Retornar el documento del usuario
     # No devolvemos el objeto Pydantic UserDB, sino el dict de MongoDB, que es suficiente
-    return user_doc
+    #return user_doc
+
+    # En routers/deps.py, reemplaza la línea de 'return user_doc' por esto:
+
+# 3. Retornar el objeto Pydantic
+# Creamos una instancia del modelo Pydantic 'User' a partir del dict de MongoDB
+    return User(**user_doc)
