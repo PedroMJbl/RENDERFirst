@@ -331,7 +331,9 @@ app = FastAPI(
 # Montar directorios estáticos
 app.mount("/static", StaticFiles(directory="static"), name="static")
 '''
-                                         # Cambiado el 06/11/2025
+                                       # Cambiado el 06/11/2025 Este es el que funcionaba a día de hoy/ 09/11/2025
+
+                                       
 from fastapi import FastAPI
 from routers import products, users, jwt_auth_users, basic_auth_users, users_db
 from fastapi.staticfiles import StaticFiles
@@ -382,6 +384,11 @@ async def root():
 @app.get("/url", tags=["default"])
 async def url():
     return {"url_course": "https://mouredev.com/python"}
+
+
+
+
+
 
 
 

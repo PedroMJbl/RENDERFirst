@@ -552,17 +552,24 @@ async def users(id:int):
                                         ### martes, 29 de julio de 2025 07:55 Empiezo ###
 
 class User(BaseModel):
-    id:int
+    #id:int
+    id: str                                               #11/09/2025
     name: str
     surname: str
     url: str
     age: int
-
-users_list=  [User (id=1,name='Brais', surname='Moure', url='http://moure.dev',age=35),
-              User (id=2,name='Peter', surname='Moure', url='http://moure.dev',age=35),
-              User (id=3,name='Manolo', surname='Moure', url='http://moure.dev',age=35),
-              User (id=4,name='Jorge', surname='Moure', url='http://moure.dev',age=35),
-              User (id=5,name='Miguelón', surname='Moure', url='http://moure.dev',age=35)]  
+'''
+users_list=  [User ('id=1',name='Brais', surname='Moure', url='http://moure.dev',age=35),
+              User ('id=2',name='Peter', surname='Moure', url='http://moure.dev',age=35),
+              User ('id=3',name='Manolo', surname='Moure', url='http://moure.dev',age=35),
+              User ('id=4',name='Jorge', surname='Moure', url='http://moure.dev',age=35),
+              User ('id=5',name='Miguelón', surname='Moure', url='http://moure.dev',age=35)]  
+'''
+users_list=  [User (id='1',name='Brais', surname='Moure', url='http://moure.dev',age=35),
+              User (id='2',name='Peter', surname='Moure', url='http://moure.dev',age=35),
+              User (id='3',name='Manolo', surname='Moure', url='http://moure.dev',age=35),
+              User (id='4',name='Jorge', surname='Moure', url='http://moure.dev',age=35),
+              User (id='5',name='Miguelón', surname='Moure', url='http://moure.dev',age=35)]
    
 '''
 @app.get('/user/{id}')
