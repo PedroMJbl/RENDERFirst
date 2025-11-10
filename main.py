@@ -333,7 +333,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 '''
                                        # Cambiado el 06/11/2025 Este es el que funcionaba a día de hoy/ 09/11/2025
 
-                                       
+'''                                      
 from fastapi import FastAPI
 from routers import products, users, jwt_auth_users, basic_auth_users, users_db
 from fastapi.staticfiles import StaticFiles
@@ -384,7 +384,71 @@ async def root():
 @app.get("/url", tags=["default"])
 async def url():
     return {"url_course": "https://mouredev.com/python"}
+'''
 
+from fastapi import FastAPI
+from routers import products, users, jwt_auth_users, basic_auth_users, users_db
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
+# Define la ruta base para que apunte a la ubicación real del proyecto
+BASE_DIR = Path(__file__).resolve().parent
+
+# Inicialización de la aplicación FastAPI con el título personalizado
+app = FastAPI(
+    title="FASTAPI2",
+    version="0.1.0",
+    description="Backend de ejemplo con Autenticación JWT y persistencia en MongoDB."
+)
+
+# Montar directorios estáticos usando la ruta absoluta
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "Static"), 
+    name="static"
+)
+
+# --------------- Inclusión de Routers (con etiquetas para Swagger) ---------------
+
+# 1. Router de JWT (Debe ir PRIMERO para capturar /users/me y evitar el 422)
+app.include_router(
+    jwt_auth_users.router, 
+    prefix="/users", 
+    tags=["JWT Auth"]
+)
+
+# 2. Router de Usuarios de MongoDB
+app.include_router(
+    users_db.router, 
+    prefix="/userdb", 
+    tags=["MongoDB Users"]
+)
+
+# Router de Auth Básica (Autenticación por Credenciales)
+app.include_router(basic_auth_users.router, tags=["Auth Básica"])
+
+# Otros Routers
+app.include_router(products.router, tags=["Productos"])
+
+# 5. Router de Usuarios Simples (Mover al FINAL)
+# Nota: La corrección de tipado a 'str' en users.py, junto con este aislamiento, 
+# resuelve el último error del 422.
+app.include_router(
+    users.router, 
+    prefix="/simpleusers",
+    tags=["Usuarios Simples"]
+)
+
+
+# --------------- Rutas de Ejemplo (Root y URL) ---------------
+
+@app.get("/", tags=["default"])
+async def root():
+    return {"message": "¡Servidor de FastAPI funcionando con JWT y MongoDB!"}
+
+@app.get("/url", tags=["default"])
+async def url():
+    return {"url_course": "https://mouredev.com/python"}
 
 
 
