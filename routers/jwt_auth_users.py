@@ -1042,7 +1042,8 @@ def authenticate_user(username: str, password: str) -> Optional[dict]:
     # 4. Éxito: Devolvemos el documento del usuario de la DB
     return user_doc
 
-@router.get('/users/me')
+#@router.get('/users/me')
+@router.get('/me')
 async def me(user: User = Depends(get_current_user)):
     return user
 
