@@ -12,7 +12,8 @@ import os
 # Si usas un puerto diferente o Atlas, ajusta esta línea.
 # NOTA: Por defecto, se usa localhost.
 #MONGO_DB_URI = "mongodb://localhost:27017" # Para localhost
-MONGO_DB_URI = "mongodb+srv://Pedro_db_user:ArhjnM57i@cluster-de-pedro-atlas.w5yrex6.mongodb.net/" # Para Mongo-ATLAS
+MONGO_DB_URI = "mongodb+srv://Pedro_db_user.users:ArhjnM57i@cluster-de-pedro-atlas.w5yrex6.mongodb.net/" # Para Mongo-ATLAS
+#MONGO_DB_URI = "mongodb+srv://Pedro_db_user:ArhjnM57i@cluster-de-pedro-atlas.w5yrex6.mongodb.net/" # Para Mongo-ATLAS
 #MONGO_DB_URI = "mongodb+srv://fastapi_db:ArhjnM57i@cluster-de-pedro-atlas.w5yrex6.mongodb.net/" # Para Mongo-ATLAS
 try:
     # Intenta conectar al cliente MongoDB
